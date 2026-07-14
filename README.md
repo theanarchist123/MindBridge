@@ -1,101 +1,107 @@
 <div align="center">
 
-# 🧠 MindBridge
+<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e0/512.gif" alt="🧠" width="72" height="72">
 
-### Your home to happiness.
-
-A privacy-first, tiered mental health support platform built for college students — combining self-help tools, anonymous peer support, and AI-assisted care escalation in one place.
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Outfit&weight=800&size=50&pause=1000&color=0D9488&center=true&vCenter=true&width=800&height=100&lines=MindBridge;Your+Home+to+Happiness;A+Safe+Space+for+Students;Track.+Chat.+Heal." alt="Typing SVG" /></a>
 
 <img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,nodejs,mongodb,vercel,git,github" alt="Tech Stack" />
+
+<br/>
+<br/>
+
+<!-- Terminal Boot Sequence Simulation -->
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&pause=500&color=10B981&background=0F172A&center=false&vCenter=false&multiline=true&width=600&height=140&lines=%3E_+npm+run+dev;%5Binfo%5D+Starting+MindBridge+Environment...;%5Bwait%5D+Initializing+Anonymous+Peer+Tunnels...;%5Bwait%5D+Connecting+to+MindBot+Neural+Net...;%5Bready%5D+MindBridge+is+Live!+Open+http%3A%2F%2Flocalhost%3A3000" alt="Terminal Demo" /></a>
+
+<br/>
+<br/>
+
+<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f308/512.gif" alt="🌈" width="32" height="32"> **Zero forced identification. Total data privacy. Immediate help.** <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.gif" alt="✨" width="32" height="32">
 
 </div>
 
 ---
 
-## 💭 The Problem
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1fa7a/512.gif" alt="🩺" width="28" height="28"> The 3-Tier Support Architecture
 
-College is stressful — exams, deadlines, homesickness, and pressure to perform pile up fast. Most students never reach out for help, not because support doesn't exist, but because the first step (booking a counsellor, admitting something's wrong) feels too big.
+```mermaid
+graph TD
+    classDef selfhelp fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px,color:#0f172a;
+    classDef peer fill:#ccfbf1,stroke:#14b8a6,stroke-width:2px,color:#0f172a;
+    classDef clinical fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#0f172a;
+    classDef user fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#ffffff,border-radius:10px;
 
-**MindBridge** closes that gap with a graduated support model: start with private self-help tools, move to anonymous peer conversations if you need more, and get connected to a real counsellor automatically if things get serious — all without ever forcing a student to expose their identity before they're ready.
+    User((Student)):::user
 
-## 🩺 How It Works — The 3-Tier Model
+    subgraph Tier 1 : Self-Help [Private & Instant]
+        A1[Mood Tracking & Journal]:::selfhelp
+        A2[AI MindBot Companion]:::selfhelp
+        A3[CBT Distortion Reframing]:::selfhelp
+        A4[Roleplay Simulator]:::selfhelp
+    end
 
+    subgraph Tier 2 : Peer Support [Anonymous]
+        B1[Real-time Peer Matching]:::peer
+        B2[24-hour Auto-Delete Rooms]:::peer
+        B3[Certified Student Supporters]:::peer
+    end
+
+    subgraph Tier 3 : Clinical Escalation [Consent-Gated]
+        C1[PHQ-9 / GAD-7 Assessments]:::clinical
+        C2[AI Passive Crisis Detection]:::clinical
+        C3[Direct Counselor Alerts]:::clinical
+    end
+
+    User -->|Daily Use| Tier1
+    User -->|Needs Connection| Tier2
+    Tier1 -.->|Flags Risk| Tier3
+    Tier2 -.->|Escalates| Tier3
 ```
-   TIER 1                    TIER 2                     TIER 3
- Self-Help          →      Peer Support         →      Counsellor
- (private, instant)       (anonymous, real-time)      (consent-gated)
 
- • Mood tracking            • Matched peer chat         • Auto-escalation on
- • PHQ-9 / GAD-7 / PSS-10     rooms (24h auto-delete)     crisis detection
-   assessments              • Certified peer               or high-severity
- • MindBot AI companion       supporters                   assessment scores
- • CBT thought reframing    • Escalation button if       • Alerts routed to
- • Vent Box & roleplay        a chat gets too heavy         the student's college
-   simulator
-```
+---
 
-Every assessment is scored and silently tagged with a support tier (1–3), so the right level of help finds the student — instead of the student having to go find it.
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.gif" alt="✨" width="28" height="28"> Core Features
 
-## ✨ Features
+| Feature | Description |
+| :--- | :--- |
+| 🌤️ **Mood Landscapes** | Daily 1–5 mood logging with emotive tags (exam stress, sleep, family). Visualize emotional trends over time with immersive UI. |
+| 🤖 **MindBot AI** | A persistent AI companion that remembers past check-ins, reads your assessment scores, and adjusts its tone dynamically to support you. |
+| 🧩 **Detangle (CBT)** | Feed the AI a chaotic or anxious thought. It identifies the cognitive distortion (e.g., Catastrophizing) and helps you reframe it. |
+| 🫂 **Anonymous Peer Rooms** | Real-time chat powered by Pusher. Matched by pseudonym hashes. All messages self-destruct after 24 hours to protect privacy. |
+| 🚨 **Crisis Detection** | Passive natural language processing flags crisis language in real-time, instantly surfacing hotlines and alerting counselors. |
+| 📱 **Native Capacitor App** | Wrapped in Capacitor for a true iOS/Android native feel, complete with system-level **Haptic Feedback** (`@capacitor/haptics`). |
 
-| Category | What it does |
-|---|---|
-| 🌤️ **Mood Tracker** | Daily 1–5 mood logging with emoji, tags (exam stress, sleep, family...), and journal notes; trends visualized with Recharts |
-| 📋 **Clinical Assessments** | Standardized PHQ-9 (depression), GAD-7 (anxiety), and PSS-10 (stress) screeners with automatic severity + tier scoring |
-| 🤖 **MindBot** | An AI companion with persistent memory and conversation summarization — it remembers past check-ins and adjusts tone based on recent assessment history |
-| 🧩 **Detangle (CBT Tool)** | Feed it an anxious thought, get back the cognitive distortion it represents and a balanced reframe |
-| 📝 **Vent Box** | Dump a chaotic wall of stress; get back the 1–2 things that actually matter right now |
-| 🎭 **Conversation Simulator** | Practice a hard conversation (asking for an extension, confronting a friend) against an AI roleplaying the other person, at adjustable difficulty |
-| 🫂 **Anonymous Peer Rooms** | Real-time chat via Pusher, matched by pseudonym hash — never by identity. Messages self-destruct after 24 hours |
-| 🚨 **Crisis Detection & Escalation** | Passive detection on chat input flags crisis language and silently opens a counsellor alert — no student has to press a button to be safe |
-| 🔒 **Consent-Gated Contact** | Even in an emergency alert, a student's identity is only attached if they've explicitly opted in |
+---
 
-## 🛡️ Privacy & Safety, By Design
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f512/512.gif" alt="🔒" width="28" height="28"> Privacy & Safety, By Design
 
-MindBridge treats anonymity as a first-class feature, not an afterthought:
+MindBridge treats anonymity as a first-class citizen, not an afterthought:
+- 🕵️ **Zero Real Identities**: Students chat via hashed pseudonyms (`studentHash`), never real names.
+- 🗑️ **Ephemeral Data**: MongoDB TTL indexes automatically wipe peer chat histories after 24 hours.
+- 🛡️ **Consent-Gated Contact**: Emergency alerts notify counselors of the *situation*, but the student's real identity is only unmasked if they have explicitly checked `consentToContact`.
+- 🛑 **AI Guardrails**: MindBot instantly drops its conversational persona when self-harm is detected, refusing to "play therapist" and enforcing immediate clinical routing.
 
-- **No real identities in peer chat** — students are matched and chat via `studentHash` / `peerHash`, never a name or email.
-- **Self-destructing messages** — a MongoDB TTL index wipes peer chat history 24 hours after it's written.
-- **Hashed accounts** — emails are stored as `emailHash`, not plaintext, for lookup purposes only.
-- **Consent before contact** — an assessment or crisis flag can open a counsellor alert, but the student's identity is only shared if `consentToContact` is explicitly true.
-- **Crisis protocol built into the AI layer** — MindBot is instructed to drop its casual tone the moment self-harm intent is detected, surface real hotline numbers, and defer to a human immediately rather than attempt to "handle" it.
+---
 
-## 🧰 Tech Stack
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.gif" alt="🚀" width="28" height="28"> Getting Started
 
-<img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,nodejs,mongodb,vercel,git,github" alt="Tech Stack" />
-
-| Layer | Tool |
-|---|---|
-| Framework | Next.js 16 (App Router) + React 19 + TypeScript |
-| Styling | Tailwind CSS + shadcn/ui |
-| Database | MongoDB via Mongoose |
-| Auth | NextAuth.js |
-| Realtime | Pusher (peer chat channels) |
-| AI / LLM | Local Ollama runtime (OpenAI-compatible SDK), model configurable via `OLLAMA_MODEL` |
-| Email | Resend |
-| Forms & Validation | React Hook Form + Zod |
-| Charts | Recharts |
-
-> Ollama, Pusher, and Resend don't have square icons on skillicons.dev yet — they're called out in the table above instead of forced into the icon row.
-
-## 🚀 Getting Started
-
-**1. Clone and install**
+### 1. Clone & Install
 ```bash
 git clone https://github.com/theanarchist123/MindBridge.git
 cd MindBridge
 npm install
 ```
 
-**2. Set up environment variables**
-
+### 2. Environment Setup
 Create a `.env.local` in the project root:
-
 ```env
+# Database
 MONGODB_URI=your_mongodb_connection_string
+
+# Authentication
+NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your_random_secret
 
-# Peer chat (Pusher)
+# Realtime Chat (Pusher)
 PUSHER_APP_ID=
 PUSHER_KEY=
 PUSHER_SECRET=
@@ -103,59 +109,34 @@ PUSHER_CLUSTER=
 NEXT_PUBLIC_PUSHER_KEY=
 NEXT_PUBLIC_PUSHER_CLUSTER=
 
-# AI (Ollama, OpenAI-compatible endpoint)
-OLLAMA_BASE_URL=
-OLLAMA_API_KEY=
-OLLAMA_MODEL=llama3.2
+# AI (Local or Remote OpenAI-Compatible)
+OLLAMA_BASE_URL=https://api.ollama.com
+OLLAMA_API_KEY=your_key
+OLLAMA_MODEL=gemma3:4b
 
-# Counsellor onboarding
-COUNSELLOR_INVITE_CODE=
+# Admin Config
+COUNSELLOR_INVITE_CODE=mindbridge-admin-2026
 ```
 
-**3. (Optional) Seed the database**
-```bash
-npm run seed
-```
-
-**4. Run the dev server**
+### 3. Run the Development Server
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) 🎉
-
-## 📁 Project Structure
-
+### 4. Build for Native (Capacitor)
+```bash
+npx cap sync
+npx cap open ios      # Opens Xcode
+npx cap open android  # Opens Android Studio
 ```
-MindBridge/
-├── src/
-│   ├── app/
-│   │   ├── (dashboard)/      # mood, assessment, mindbot, peer, resources
-│   │   ├── (counsellor)/     # counsellor-facing views
-│   │   ├── api/              # ai, assessment, auth, counsellor, mindbot, mood, peer, pusher, user
-│   │   └── auth/              # sign in / sign up
-│   ├── components/
-│   ├── lib/                  # auth, mongoose, ollama, pusher, resources helpers
-│   ├── models/                # Assessment, ChatMessage, CounsellorAlert, MindBotMemory, MoodLog, PeerRoom, User
-│   └── hooks/
-└── scripts/seed.ts
-```
-
-## ⚠️ A Note on Scope
-
-MindBridge is a support and triage layer — it is **not** a replacement for professional mental healthcare, and MindBot is **not** a therapist. If you or someone you know is in crisis, please reach out directly:
-
-- **KIRAN (Govt. of India):** 1800-599-0019 (24/7, toll-free)
-- **Vandrevala Foundation:** 9999 666 555 (24/7, multilingual)
-
-## 📜 License
-
-No license file is currently included in this repo. If you intend for others to use, fork, or contribute to MindBridge, consider adding one (MIT is a common, permissive choice for portfolio/open projects).
 
 ---
 
 <div align="center">
 
-Built with care, for students who need a lower-friction first step toward feeling better. 💙
+**⚠️ Important Scope Note** <br/>
+*MindBridge is a triage and support layer. It is **not** a replacement for professional clinical care. If you are in crisis, please call 1800-599-0019 (KIRAN, India) or 988 (US).*
+
+Built with <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f499/512.gif" alt="💙" width="20" height="20"> for students who just need a safe space to start.
 
 </div>

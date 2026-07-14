@@ -1,23 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
+import { Haptics, ImpactStyle } from "@capacitor/haptics";
 
 export function HapticsProvider() {
   useEffect(() => {
     // Only run on client
-    if (typeof window === "undefined" || !navigator.vibrate) return;
+    if (typeof window === "undefined") return;
 
-    const handlePointerDown = (e: PointerEvent) => {
+    const handlePointerDown = async (e: PointerEvent) => {
       // Find the closest clickable element (button, anchor, or anything with role=button)
       const target = e.target as HTMLElement;
       const clickable = target.closest("button, a, [role='button'], [role='tab'], input[type='submit']");
       
       if (clickable) {
-        // Trigger a very light haptic tick (10ms)
+        // Trigger a native system-level haptic tick
         try {
-          navigator.vibrate(10);
+          await Haptics.impact({ style: ImpactStyle.Light });
         } catch (err) {
-          // Ignore if the browser blocks it
+          // Ignore if running on a platform that doesn't support it or if it fails
         }
       }
     };
