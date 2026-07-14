@@ -27,8 +27,34 @@ export function SettingsDialog() {
         }
       })
       .catch(console.error);
+      
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      setNotifications(Notification.permission === 'granted');
+    }
     setMounted(true);
   }, []);
+
+  const handleNotificationsToggle = async (checked: boolean) => {
+    if (checked) {
+      if ('Notification' in window) {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          setNotifications(true);
+          if ('serviceWorker' in navigator) {
+            fetch('/api/notifications/subscribe', { method: 'POST' }).catch(console.error);
+          }
+        } else {
+          setNotifications(false);
+          alert("Notification permission was denied.");
+        }
+      } else {
+        alert("Your browser doesn't support notifications.");
+        setNotifications(false);
+      }
+    } else {
+      setNotifications(false);
+    }
+  };
 
   const handleMemoryToggle = async (checked: boolean) => {
     setMemoryEnabled(checked);
@@ -105,7 +131,7 @@ export function SettingsDialog() {
                 </div>
                 <Switch
                   checked={notifications}
-                  onCheckedChange={setNotifications}
+                  onCheckedChange={handleNotificationsToggle}
                 />
               </div>
 

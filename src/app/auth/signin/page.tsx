@@ -84,7 +84,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row relative overflow-hidden">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-mesh opacity-30 pointer-events-none" />
 
       {/* Left Side — Brand */}
@@ -122,12 +122,7 @@ export default function SignInPage() {
 
       {/* Right Side — Form */}
       <div className="w-full md:w-1/2 p-6 md:p-16 flex items-center justify-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-full max-w-md space-y-6"
-        >
+        <div className="w-full max-w-md space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
           {/* Mobile logo */}
           <div className="md:hidden flex items-center gap-2 mb-6 justify-center">
             <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />
@@ -243,7 +238,7 @@ export default function SignInPage() {
               Create your pseudonym
             </Link>
           </p>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

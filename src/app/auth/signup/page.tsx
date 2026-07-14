@@ -109,15 +109,11 @@ export default function SignUpPage() {
           <Card className="border-0 shadow-2xl bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl relative overflow-hidden">
             <CardContent className="pt-6">
               <form onSubmit={handleRegister} className="space-y-6">
-                
-                <AnimatePresence mode="wait">
+                <div className="space-y-6">
                   {step === 1 ? (
-                    <motion.div
+                    <div
                       key="step1"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      className="space-y-6"
+                      className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500"
                     >
                       <div className="space-y-3">
                         <Label htmlFor="username" className="text-slate-700 dark:text-slate-300">Your Pseudonym</Label>
@@ -197,14 +193,11 @@ export default function SignUpPage() {
                       <Button type="button" onClick={() => { if (username && college && (role !== "counsellor" || inviteCode)) setStep(2); }} className="w-full h-12 text-base font-medium rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 shadow-lg group">
                         Next Step <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
-                    </motion.div>
+                    </div>
                   ) : (
-                    <motion.div
+                    <div
                       key="step2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      className="space-y-6"
+                      className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500"
                     >
                       <div className="p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/30 flex items-center justify-between mb-4">
                         <span className="text-sm font-medium text-teal-800 dark:text-teal-300">Identity: <span className="font-bold">{username}</span></span>
@@ -238,9 +231,9 @@ export default function SignUpPage() {
                       >
                         {loading ? "Securing Account..." : "Complete Registration"}
                       </Button>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
+                </div>
                 
               </form>
             </CardContent>

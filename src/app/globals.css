@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 @theme inline {
   --color-navy-900: #0a0f1e;
   --color-navy-800: #0f172a;

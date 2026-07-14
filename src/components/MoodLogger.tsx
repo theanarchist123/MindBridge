@@ -38,7 +38,7 @@ function getQuote(len: number) {
   return NOTE_QUOTES.find((q) => len >= q.min && (len <= q.max || q.max === 500))?.text ?? "";
 }
 
-export function MoodLogger({ onLogged }: { onLogged?: () => void }) {
+export function MoodLogger({ onLogged }: { onLogged?: (mood: string) => void }) {
   const [phase, setPhase] = useState<"emoji" | "detail" | "done">("emoji");
   const [selectedMood, setSelectedMood] = useState<typeof MOODS[0] | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -82,7 +82,7 @@ export function MoodLogger({ onLogged }: { onLogged?: () => void }) {
       toast.success("Check-in saved 🌤️", {
         description: "Your mood has been logged. See you tomorrow.",
       });
-      onLogged?.();
+      onLogged?.(selectedMood.label);
 
       // Reset after 2.5s
       setTimeout(() => {

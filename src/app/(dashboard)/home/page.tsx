@@ -12,6 +12,9 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Activity, Calendar, ArrowRight, ShieldCheck, FileText, MessageCircle, Users } from "lucide-react";
 import Link from "next/link";
+import { SpotifyEmbed } from "@/components/SpotifyEmbed";
+import { WeatherContext } from "@/components/WeatherContext";
+import { AcademicContext } from "@/components/AcademicContext";
 import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
@@ -24,6 +27,17 @@ export default function StudentHome() {
   const [showCrisis, setShowCrisis] = useState(false);
   const [greeting, setGreeting] = useState("Good morning");
   const [history, setHistory] = useState<any[]>([]);
+  const [playlistMood, setPlaylistMood] = useState<string | null>(null);
+
+  const getPlaylistForMood = (mood: string) => {
+    switch (mood) {
+      case "Awful": return "37i9dQZF1DWVV27DiNWxkR"; // Lofi Beats
+      case "Bad": return "37i9dQZF1DWZq91oVsPEVS"; // Nature Sounds
+      case "Good": return "37i9dQZF1DXcBWIGoYBM5M"; // Today's Top Hits
+      case "Great": return "37i9dQZF1DXdPec7aLTmlC"; // Happy Hits
+      default: return "37i9dQZF1DWWQRwui0ExPn"; // Lofi Hip Hop
+    }
+  };
 
   useEffect(() => {
     fetch("/api/assessment")
@@ -170,9 +184,21 @@ export default function StudentHome() {
             </motion.div>
           ) : (
             <>
-              <MoodLogger />
+              <AcademicContext />
+              <WeatherContext />
+              <MoodLogger onLogged={(mood) => setPlaylistMood(mood)} />
               
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {playlistMood && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  className="mt-6"
+                >
+                  <SpotifyEmbed playlistId={getPlaylistForMood(playlistMood)} mood={playlistMood} />
+                </motion.div>
+              )}
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                 <Card className="border-0 shadow-lg bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
                   <CardHeader className="pb-2">

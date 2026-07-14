@@ -38,11 +38,16 @@ export default function ResourceDetailPage() {
   };
 
   const goNext = () => {
+    if (typeof window !== "undefined" && navigator.vibrate) {
+      if (isLastStep) navigator.vibrate([100, 50, 100]); // Celebration buzz
+      else navigator.vibrate(50); // Small tap
+    }
     markComplete(currentStep);
     if (!isLastStep) setCurrentStep((s) => s + 1);
   };
 
   const goPrev = () => {
+    if (typeof window !== "undefined" && navigator.vibrate) navigator.vibrate(30);
     if (currentStep > 0) setCurrentStep((s) => s - 1);
   };
 
@@ -119,7 +124,10 @@ export default function ResourceDetailPage() {
                 </p>
               </div>
               <Button
-                onClick={() => setIsStarted(true)}
+                onClick={() => {
+                  if (typeof window !== "undefined" && navigator.vibrate) navigator.vibrate([50, 50]);
+                  setIsStarted(true);
+                }}
                 className="bg-teal-600 hover:bg-teal-700 text-white px-8 rounded-xl"
               >
                 Begin Guide
