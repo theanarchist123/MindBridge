@@ -22,7 +22,7 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       {/* Frosted glass bar */}
       <div className="bg-white/80 dark:bg-slate-950/90 backdrop-blur-2xl border-t border-slate-200/60 dark:border-slate-800/60 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]">
-        <div className="flex items-stretch justify-around px-2 pb-safe">
+        <div className="flex items-center overflow-x-auto overflow-y-hidden snap-x scroll-smooth snap-mandatory px-4 pb-safe space-x-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {tabs.map((tab) => {
             const isActive = pathname.startsWith(tab.href);
             const Icon = tab.icon;
@@ -30,18 +30,18 @@ export function BottomNav() {
               <Link
                 key={tab.href}
                 href={tab.href}
-                className="relative flex flex-col items-center justify-center py-3 px-3 flex-1 min-w-0 group"
+                className="relative flex flex-col items-center justify-center py-4 px-3 min-w-[72px] shrink-0 snap-center group"
               >
                 {/* Active indicator pill */}
                 {isActive && (
                   <motion.div
                     layoutId="bottom-nav-indicator"
-                    className="absolute inset-x-1 top-1.5 h-8 rounded-full bg-teal-500/10 dark:bg-teal-400/10"
+                    className="absolute inset-x-1 top-2 h-10 rounded-full bg-teal-500/10 dark:bg-teal-400/10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
 
-                <div className="relative flex flex-col items-center gap-0.5">
+                <div className="relative flex flex-col items-center gap-1">
                   {/* Glow blob behind active icon */}
                   {isActive && (
                     <motion.div
@@ -52,7 +52,7 @@ export function BottomNav() {
                   )}
                   <Icon
                     className={cn(
-                      "relative w-5 h-5 transition-all duration-200",
+                      "relative w-7 h-7 transition-all duration-200",
                       isActive
                         ? "text-teal-600 dark:text-teal-400 scale-110"
                         : "text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400"
@@ -61,7 +61,7 @@ export function BottomNav() {
                   />
                   <span
                     className={cn(
-                      "text-[10px] font-medium tracking-tight transition-all duration-200",
+                      "text-xs font-medium tracking-tight transition-all duration-200",
                       isActive
                         ? "text-teal-600 dark:text-teal-400"
                         : "text-slate-400 dark:text-slate-500"

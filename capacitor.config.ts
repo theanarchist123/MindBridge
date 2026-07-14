@@ -5,10 +5,17 @@ const config: CapacitorConfig = {
   appName: 'MindBridge',
   webDir: 'out',
   server: {
-    // Hardcoded for local mobile testing on the same network
-    // Change this to the production URL when deploying (e.g., https://mindbridge.app)
-    url: 'http://192.168.0.105:3001',
-    cleartext: true
+    // Pointing to your live Vercel deployment!
+    url: 'https://mind-bridge-liart.vercel.app',
+    cleartext: false
+  },
+  plugins: {
+    CapacitorCookies: {
+      enabled: true,
+    },
+    CapacitorHttp: {
+      enabled: true,
+    }
   }
 };
 
