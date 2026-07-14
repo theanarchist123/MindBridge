@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Heart, Lock, User, ArrowRight, ShieldCheck, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,6 @@ import { toast } from "sonner";
 
 export default function SignInPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { status } = useSession();
 
   const [username, setUsername] = useState("");
