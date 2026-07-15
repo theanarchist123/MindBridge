@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getOllamaClient } from '@/lib/ollama'
+import { getOllamaClient, detectCrisisKeywords } from '@/lib/ollama'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../auth/[...nextauth]/route'
 
