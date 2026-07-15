@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface Message {
   id: string;
@@ -101,7 +102,7 @@ export default function PeerRoomPage() {
     // Don't add optimistically if we are triggering via pusher, pusher will bounce it back.
     // Actually, usually you do add it optimistically, but let's just let Pusher bounce it for simplicity.
 
-    await fetch("/api/peer/message", {
+    const res = await fetch("/api/peer/message", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -111,6 +112,19 @@ export default function PeerRoomPage() {
         channel: `private-room-${roomId}`,
       }),
     });
+
+    if (!res.ok) {
+      try {
+        const errorData = await res.json();
+        if (errorData.error) {
+          toast.error(errorData.error);
+        } else {
+          toast.error("Failed to send message.");
+        }
+      } catch (e) {
+        toast.error("An error occurred while sending the message.");
+      }
+    }
   };
 
   return (

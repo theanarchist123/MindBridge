@@ -1,85 +1,140 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle } from "lucide-react";
+import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle, Lock, Zap } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { Outfit } from "next/font/google";
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 export default function LandingPage() {
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-slate-950 flex flex-col relative overflow-x-hidden">
-      {/* Decorative Background */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-50 dark:opacity-20 pointer-events-none" />
+    <div className={`flex-1 w-full bg-[#0a0f1c] text-white flex flex-col relative overflow-x-hidden ${outfit.className}`}>
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-teal-500/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-rose-500/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute top-[40%] left-[50%] w-[30%] h-[30%] bg-indigo-500/20 rounded-full blur-[100px] mix-blend-screen -translate-x-1/2" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&q=80&w=2000')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+      </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 p-4 sm:p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-rose-500 fill-rose-500" />
-          <span className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">MindBridge</span>
-        </div>
-        <div className="flex gap-2 sm:gap-4">
-          <Link href="/auth/signin" className={buttonVariants({ variant: "ghost", size: "sm", className: "sm:text-base" })}>
+      <nav className="relative z-10 px-6 py-6 flex justify-between items-center max-w-7xl mx-auto w-full">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-2"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-rose-400 flex items-center justify-center shadow-lg">
+            <Heart className="w-6 h-6 text-white fill-white" />
+          </div>
+          <span className="text-2xl font-bold tracking-tight">MindBridge</span>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex gap-4 items-center"
+        >
+          <Link href="/auth/signin" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
             Log in
           </Link>
-          <Link href="/auth/signup" className={buttonVariants({ size: "sm", className: "bg-teal-600 hover:bg-teal-700 text-white rounded-full px-4 sm:px-6 sm:text-base" })}>
+          <Link href="/auth/signup" className="text-sm font-semibold bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-transform hover:scale-105 active:scale-95">
             Get Started
           </Link>
-        </div>
+        </motion.div>
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 relative z-10 pb-20 pt-10">
-        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-          
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-rose-100/50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800/30 text-xs sm:text-sm font-medium mb-2 sm:mb-4">
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>A confidential space for university students</span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight">
-            Mental wellness,<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-teal-300">without the wait.</span>
-          </h1>
-          
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-sans leading-relaxed px-2">
-            Assess your mood, chat confidentially with our AI listener, and connect with peers who understand what you're going through.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-2 sm:pt-4 w-full sm:w-auto px-4 sm:px-0">
-            <Link href="/auth/signup" className={buttonVariants({ size: "lg", className: "w-full sm:w-auto h-12 sm:h-14 px-8 text-base sm:text-lg rounded-full bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 shadow-xl" })}>
-              Start your journey <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
-            <Link href="/about" className={buttonVariants({ size: "lg", variant: "outline", className: "w-full sm:w-auto h-12 sm:h-14 px-8 text-base sm:text-lg rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-slate-200 dark:border-slate-800" })}>
-              Learn more
-            </Link>
-          </div>
-          
-          <div className="pt-8 sm:pt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-left max-w-3xl mx-auto px-2 sm:px-0">
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2">
-              <div className="p-2 sm:p-3 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-2xl w-fit">
-                <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">100% Confidential</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Your AI chats are never saved or sent to any server.</p>
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 relative z-10 pt-20 pb-32 min-h-[85vh]">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 hover:bg-white/10 transition-colors cursor-default"
+        >
+          <Sparkles className="w-4 h-4 text-teal-400" />
+          <span className="text-sm font-medium text-teal-100">The first AI-powered confidential space for students</span>
+        </motion.div>
+        
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.05] tracking-tighter max-w-5xl mx-auto"
+        >
+          Mental wellness,<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-300 to-teal-400 animate-gradient-x">
+            without the wait.
+          </span>
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-8 text-lg sm:text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          Assess your mood, chat confidentially with our empathetic AI, and connect with peers who truly understand what you're going through.
+        </motion.p>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10 w-full sm:w-auto"
+        >
+          <Link href="/auth/signup" className="group relative w-full sm:w-auto h-14 px-8 flex items-center justify-center text-lg font-medium rounded-full bg-teal-500 text-slate-950 overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(20,184,166,0.3)] hover:shadow-[0_0_60px_rgba(20,184,166,0.5)]">
+            <span className="relative z-10 flex items-center gap-2">
+              Start your journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+        </motion.div>
+
+        {/* Feature Cards Showcase */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 w-full">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="group p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all hover:-translate-y-2 backdrop-blur-sm"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Lock className="w-7 h-7 text-teal-400" />
             </div>
-            
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2">
-              <div className="p-2 sm:p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl w-fit">
-                <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Clinical Tools</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Standardized PHQ-9 and GAD-7 assessments built-in.</p>
+            <h3 className="text-xl font-semibold mb-3 text-white">100% Confidential</h3>
+            <p className="text-slate-400 leading-relaxed text-sm">Your AI chats are end-to-end anonymized. We never save or send them to any server. Your privacy is absolute.</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="group p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all hover:-translate-y-2 backdrop-blur-sm"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-rose-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Zap className="w-7 h-7 text-rose-400" />
             </div>
-            
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2">
-              <div className="p-2 sm:p-3 bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-2xl w-fit">
-                <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Peer Support</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Anonymous live chat rooms with peers going through the same.</p>
+            <h3 className="text-xl font-semibold mb-3 text-white">Clinical Tools</h3>
+            <p className="text-slate-400 leading-relaxed text-sm">Access standardized PHQ-9 and GAD-7 assessments built directly into your dashboard to track your mental health over time.</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="group p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all hover:-translate-y-2 backdrop-blur-sm"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <MessageCircle className="w-7 h-7 text-indigo-400" />
             </div>
-          </div>
+            <h3 className="text-xl font-semibold mb-3 text-white">Peer Support</h3>
+            <p className="text-slate-400 leading-relaxed text-sm">Join anonymous, live chat rooms with peers going through the exact same stressors, moderated for your safety.</p>
+          </motion.div>
         </div>
+
       </main>
     </div>
   );

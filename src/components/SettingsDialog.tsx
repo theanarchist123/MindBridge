@@ -116,7 +116,7 @@ export function SettingsDialog() {
             </div>
           </div>
 
-          {/* Notifications */}
+          {/* Notifications 
           <div className="space-y-4">
             <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Notifications</h4>
             
@@ -147,6 +147,7 @@ export function SettingsDialog() {
               </div>
             </div>
           </div>
+          */}
 
           {/* Privacy & Data */}
           <div className="space-y-4">

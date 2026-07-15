@@ -21,6 +21,12 @@ export async function POST(req: Request) {
       return new NextResponse('Invalid input', { status: 400 })
     }
 
+    if (await detectCrisisKeywords(text)) {
+      return NextResponse.json({ summary: "I am pausing because you mentioned something concerning. Please reach out to Tele-MANAS at 14416 immediately. Help is available." }, {
+        headers: { 'X-Crisis-Detected': 'true' }
+      })
+    }
+
     const openai = getOllamaClient()
     
     const response = await openai.chat.completions.create({

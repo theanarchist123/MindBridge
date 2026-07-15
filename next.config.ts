@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  }
-} as any;
+  // Config
+};
 
 (nextConfig as any).allowedDevOrigins = ["192.168.0.105"];
 

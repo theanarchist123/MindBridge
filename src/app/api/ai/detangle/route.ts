@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { getOllamaClient } from '@/lib/ollama'
+import { getOllamaClient, detectCrisisKeywords } from '@/lib/ollama'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../auth/[...nextauth]/route'
 
 const SYSTEM_PROMPT = `You are a Cognitive Behavioral Therapy (CBT) assistant.
 The user will provide an anxious or negative thought.
@@ -16,9 +18,20 @@ You MUST respond with valid JSON ONLY in this exact format, with no markdown for
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return new NextResponse('Unauthorized', { status: 401 })
+
     const { thought } = await req.json()
     if (!thought || typeof thought !== 'string') {
       return new NextResponse('Invalid input', { status: 400 })
+    }
+
+    if (await detectCrisisKeywords(thought)) {
+      return NextResponse.json({
+        distortionType: "Crisis Detected",
+        rationale: "This thought contains severe distress signals that indicate a need for immediate human support, not just cognitive restructuring.",
+        balancedThought: "Please reach out to Tele-MANAS at 14416 immediately. Help is available."
+      }, { headers: { 'X-Crisis-Detected': 'true' } })
     }
 
     const openai = getOllamaClient()

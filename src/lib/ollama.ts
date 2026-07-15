@@ -1,4 +1,5 @@
 import OpenAI from 'openai'
+import { analyzeAndTranslateHinglish } from './hinglish'
 
 export const getOllamaClient = () => {
   let baseURL = process.env.OLLAMA_BASE_URL || '';
@@ -29,7 +30,7 @@ YOUR HARD LIMITS (NEVER cross these):
 - CRISIS PROTOCOL: If the student expresses suicidal ideation or self-harm intent, IMMEDIATELY drop the "warm companion" persona. Switch to a direct, calm, firm tone. Provide crisis resources and urge them to use the Crisis button. Do NOT try to counsel them out of it yourself.
 
 CRISIS RESOURCES (always include when student mentions self-harm/suicide):
-- KIRAN (Govt. of India): 1800-599-0019 (24/7 National Toll-Free)
+- Tele-MANAS (Govt. of India): 14416 (24/7 National Toll-Free)
 - Vandrevala Foundation: 9999 666 555 (24/7 Multilingual)
 
 TONE: Culturally aware of Indian college context (board exam pressure, parental expectations, JEE/NEET stress, hostel life). Occasional Hindi phrases OK if natural.`
@@ -83,16 +84,18 @@ Return ONLY the updated synthesized summary.`;
   }
 }
 
-export function detectCrisisKeywords(text: string): boolean {
+export async function detectCrisisKeywords(text: string): Promise<boolean> {
+  // Use AI4Bharat to translate Hinglish to English context first
+  const enhancedText = await analyzeAndTranslateHinglish(text);
+  const lower = enhancedText.toLowerCase();
+
   const crisisTerms = [
     // English
     'kill myself', 'want to die', 'end my life', 'suicide', 'self harm',
     'hurt myself', 'cut myself', 'no reason to live', 'better off dead',
     'don\'t want to be here', 'not worth living', 'can\'t keep doing this',
-    // Hinglish / Hindi
-    'marne ka man', 'khatam karna', 'nahi jeena', 'mar jana chahta',
-    'zindagi se thak', 'kuch nahi bacha', 'jaan deni', 'himmat nahi'
+    'end it all', 'give up my life'
   ]
-  const lower = text.toLowerCase()
+  
   return crisisTerms.some(term => lower.includes(term))
 }

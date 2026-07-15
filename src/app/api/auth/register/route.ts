@@ -5,14 +5,19 @@ import User from "@/models/User";
 
 export async function POST(req: Request) {
   try {
-    const { username, password, role, college, inviteCode } = await req.json();
+    const { username, password, role, college, inviteCode, email } = await req.json();
 
-    if (!username || !password) {
-      return new NextResponse("Missing pseudonym or password", { status: 400 });
+    if (!username || !password || !email) {
+      return new NextResponse("Missing pseudonym, password, or email", { status: 400 });
     }
 
     if (password.length < 6) {
       return new NextResponse("Password must be at least 6 characters", { status: 400 });
+    }
+
+    // Email domain validation (.ac.in or .edu.in)
+    if (!email.endsWith('.ac.in') && !email.endsWith('.edu.in')) {
+      return new NextResponse("Please use a valid university email (.ac.in or .edu.in)", { status: 400 });
     }
 
     const allowedColleges = ['Generic University', 'Mumbai University', 'Delhi University', 'IIT Bombay'];
@@ -40,6 +45,7 @@ export async function POST(req: Request) {
     const user = await User.create({
       pseudonym: username,
       password: hashedPassword,
+      email: email,
       role: requestedRole,
       college: college,
     });

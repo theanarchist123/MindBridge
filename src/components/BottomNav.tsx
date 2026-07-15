@@ -22,7 +22,7 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       {/* Frosted glass bar */}
       <div className="bg-white/80 dark:bg-slate-950/90 backdrop-blur-2xl border-t border-slate-200/60 dark:border-slate-800/60 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center overflow-x-auto overflow-y-hidden snap-x scroll-smooth snap-mandatory px-4 pb-safe space-x-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex items-center justify-around w-full px-2 pb-safe">
           {tabs.map((tab) => {
             const isActive = pathname.startsWith(tab.href);
             const Icon = tab.icon;
@@ -30,7 +30,7 @@ export function BottomNav() {
               <Link
                 key={tab.href}
                 href={tab.href}
-                className="relative flex flex-col items-center justify-center py-4 px-3 min-w-[72px] shrink-0 snap-center group"
+                className="relative flex flex-col items-center justify-center py-4 px-2 min-w-[60px] group"
               >
                 {/* Active indicator pill */}
                 {isActive && (
@@ -52,12 +52,12 @@ export function BottomNav() {
                   )}
                   <Icon
                     className={cn(
-                      "relative w-7 h-7 transition-all duration-200",
+                      "relative w-6 h-6 transition-all duration-200",
                       isActive
-                        ? "text-teal-600 dark:text-teal-400 scale-110"
+                        ? "text-teal-600 dark:text-teal-400"
                         : "text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400"
                     )}
-                    strokeWidth={isActive ? 2.5 : 1.8}
+                    strokeWidth={isActive ? 2.5 : 2}
                   />
                   <span
                     className={cn(

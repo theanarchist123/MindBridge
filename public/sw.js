@@ -4,6 +4,7 @@ const STATIC_ASSETS = [
   '/home',
   '/manifest.json',
   '/globe.svg',
+  '/offline.html'
 ];
 
 self.addEventListener('install', (event) => {
@@ -56,6 +57,9 @@ self.addEventListener('fetch', (event) => {
         return response;
       }).catch(() => {
         // Fallback for offline mode if needed
+        if (event.request.mode === 'navigate') {
+          return caches.match('/offline.html');
+        }
       });
     })
   );

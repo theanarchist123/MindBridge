@@ -43,12 +43,12 @@ export function CrisisOverlay({ isTriggered, onClose }: { isTriggered: boolean; 
               
               <div className="flex flex-col gap-3">
                 <div>
-                  <h4 className="font-bold text-slate-900 dark:text-white">KIRAN (Govt. of India)</h4>
+                  <h4 className="font-bold text-slate-900 dark:text-white">Tele-MANAS (Govt. of India)</h4>
                   <p className="text-xs text-slate-500">24/7 National Toll-Free Mental Health Helpline</p>
                 </div>
-                <a href="tel:18005990019" className={buttonVariants({ variant: "default", className: "bg-rose-600 hover:bg-rose-700 text-white w-full h-12 text-lg font-semibold" })}>
+                <a href="tel:14416" className={buttonVariants({ variant: "default", className: "bg-rose-600 hover:bg-rose-700 text-white w-full h-12 text-lg font-semibold" })}>
                   <Phone className="mr-2 h-5 w-5" />
-                  1800-599-0019
+                  14416
                 </a>
               </div>
               

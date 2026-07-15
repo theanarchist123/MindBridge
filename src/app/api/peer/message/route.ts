@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import connectDB from "@/lib/mongoose";
 import ChatMessage from "@/models/ChatMessage";
+import { analyzeToxicity } from "@/lib/perspective";
 
 export async function POST(req: Request) {
   try {
@@ -16,6 +17,15 @@ export async function POST(req: Request) {
 
     if (!roomId || !text) {
       return new NextResponse("Missing room or text", { status: 400 });
+    }
+
+    // Phase 2: Perspective API Toxicity Check
+    const toxicityScore = await analyzeToxicity(text);
+    if (toxicityScore > 0.8) {
+      return NextResponse.json({ 
+        error: "Message flagged for violating community guidelines.",
+        toxicityScore
+      }, { status: 400 });
     }
 
     // Save message to MongoDB first so history persists

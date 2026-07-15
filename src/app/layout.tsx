@@ -33,6 +33,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0d9488" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+        <script defer data-domain="mindbridge.app" src="https://plausible.io/js/script.js"></script>
+      </head>
       <body className="min-h-full flex flex-col overscroll-none select-none md:select-auto">
         <Providers>
           {children}

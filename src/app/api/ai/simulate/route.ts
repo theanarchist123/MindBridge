@@ -1,12 +1,34 @@
 import { NextResponse } from 'next/server'
-import { getOllamaClient, streamMindBotResponse } from '@/lib/ollama'
+import { getOllamaClient, streamMindBotResponse, detectCrisisKeywords } from '@/lib/ollama'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../auth/[...nextauth]/route'
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return new NextResponse('Unauthorized', { status: 401 })
+
     const { scenario, difficulty, messages } = await req.json()
     
     if (!messages || !Array.isArray(messages)) {
       return new NextResponse('Invalid messages format', { status: 400 })
+    }
+
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.role === 'user' && await detectCrisisKeywords(lastMessage.content)) {
+       const readableStream = new ReadableStream({
+         start(controller) {
+           const encoder = new TextEncoder()
+           controller.enqueue(encoder.encode("I'm pausing our roleplay because you mentioned something concerning. Please reach out to Tele-MANAS at 14416 immediately. We are here to support you safely."));
+           controller.close();
+         }
+       })
+       return new Response(readableStream, {
+         headers: {
+           'Content-Type': 'text/event-stream',
+           'X-Crisis-Detected': 'true'
+         }
+       });
     }
 
     const systemPrompt = `You are a conversational roleplay partner in a simulation sandbox designed to help college students practice difficult conversations.

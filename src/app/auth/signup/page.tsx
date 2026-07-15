@@ -24,6 +24,7 @@ const generatePseudonym = () => {
 export default function SignUpPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
   const [college, setCollege] = useState("");
@@ -40,7 +41,7 @@ export default function SignUpPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, role, college, inviteCode }),
+        body: JSON.stringify({ username, email, password, role, college, inviteCode }),
       });
 
       if (res.ok) {
@@ -77,13 +78,13 @@ export default function SignUpPage() {
           </div>
 
           <h1 className="text-4xl lg:text-5xl font-heading font-bold text-slate-900 dark:text-white leading-tight">
-            We don't want your real name.
+            Safe & verified.
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            MindBridge is designed to be a safe space. We never ask for your email, phone number, or student ID.
+            MindBridge requires a valid university email to keep the community safe, but your identity remains totally hidden under a pseudonym.
           </p>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            Choose a pseudonym and a password you won't forget. That's all we need.
+            Choose a pseudonym and a password you won't forget.
           </p>
         </motion.div>
       </div>
@@ -145,6 +146,19 @@ export default function SignUpPage() {
                       </div>
 
                       <div className="space-y-3">
+                        <Label htmlFor="email" className="text-slate-700 dark:text-slate-300">University Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="you@college.ac.in"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="h-14 text-lg font-medium bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800"
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-3">
                         <Label htmlFor="college" className="text-slate-700 dark:text-slate-300">Your College</Label>
                         <select
                           id="college"
@@ -190,7 +204,7 @@ export default function SignUpPage() {
                         </div>
                       )}
                       
-                      <Button type="button" onClick={() => { if (username && college && (role !== "counsellor" || inviteCode)) setStep(2); }} className="w-full h-12 text-base font-medium rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 shadow-lg group">
+                      <Button type="button" onClick={() => { if (username && email && college && (role !== "counsellor" || inviteCode)) setStep(2); }} className="w-full h-12 text-base font-medium rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 shadow-lg group">
                         Next Step <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
@@ -220,7 +234,7 @@ export default function SignUpPage() {
                           />
                         </div>
                         <p className="text-xs text-amber-600 dark:text-amber-400 font-medium">
-                          Warning: Since we don't have your email, passwords CANNOT be reset. Write this down.
+                          Write this down. Password resets require email verification.
                         </p>
                       </div>
 
