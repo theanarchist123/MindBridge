@@ -84,6 +84,7 @@ export function SettingsDialog() {
 
   return (
     <Dialog>
+      {/* @ts-ignore */}
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" className="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-full">
           <Settings className="w-5 h-5" />

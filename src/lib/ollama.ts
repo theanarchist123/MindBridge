@@ -8,7 +8,7 @@ export const getOllamaClient = () => {
   
   return new OpenAI({
     baseURL: finalBaseURL,
-    apiKey: process.env.OLLAMA_API_KEY,
+    apiKey: process.env.OLLAMA_API_KEY || 'ollama',
   });
 }
 

@@ -4,7 +4,7 @@ import connectDB from "@/lib/mongoose";
 import Assessment from "@/models/Assessment";
 import CounsellorAlert from "@/models/CounsellorAlert";
 import User from "@/models/User";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from '@/lib/auth';
 import { pusherServer } from "@/lib/pusher";
 
 // Helper to determine severity and tier based on score and type

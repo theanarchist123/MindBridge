@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { pusherServer } from "@/lib/pusher";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from '@/lib/auth';
 import connectDB from "@/lib/mongoose";
 import ChatMessage from "@/models/ChatMessage";
 import { analyzeToxicity } from "@/lib/perspective";

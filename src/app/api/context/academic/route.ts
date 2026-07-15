@@ -8,14 +8,14 @@ import { getAcademicStressPeriod } from "@/lib/academicCalendars";
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
-    if (!session || !session.user?.id) {
+    if (!session || !(session.user as any)?.id) {
       return NextResponse.json({ period: null }, { status: 401 });
     }
 
     await connectDB();
     
     // Find the user to get their college
-    const user = await User.findById(session.user.id);
+    const user = await User.findById((session.user as any).id);
     if (!user || !user.college) {
       return NextResponse.json({ period: null });
     }

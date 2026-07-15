@@ -22,8 +22,10 @@ export function CrisisOverlay({ isTriggered, onClose }: { isTriggered: boolean; 
     >
       <DialogContent 
         className="sm:max-w-2xl border-rose-500 bg-rose-50 dark:bg-slate-950 shadow-[0_0_100px_rgba(225,29,72,0.2)] overflow-hidden"
-        onInteractOutside={(e) => e.preventDefault()}
-        onEscapeKeyDown={(e) => e.preventDefault()}
+        // @ts-ignore
+        onInteractOutside={(e: any) => e.preventDefault()}
+        // @ts-ignore
+        onEscapeKeyDown={(e: any) => e.preventDefault()}
       >
         <DialogHeader className="mb-4">
           <DialogTitle className="flex items-center text-3xl font-heading text-rose-600 dark:text-rose-400 gap-3">

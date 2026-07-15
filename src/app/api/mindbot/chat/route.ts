@@ -5,7 +5,7 @@ import CounsellorAlert from '@/models/CounsellorAlert'
 import MindBotMemory from '@/models/MindBotMemory'
 import Assessment from '@/models/Assessment'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../../auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 import User from '@/models/User'
 export async function GET() {
   try {
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     // Passive NLP Crisis Detection
     if (lastMessage && lastMessage.role === 'user') {
-      const isCrisis = detectCrisisKeywords(lastMessage.content)
+      const isCrisis = await detectCrisisKeywords(lastMessage.content)
       
       if (isCrisis) {
         detectedCrisis = true;
