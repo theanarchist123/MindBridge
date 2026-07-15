@@ -1,14 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle, Lock, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle, Lock, Zap, Loader2 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { Outfit } from "next/font/google";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
 export default function LandingPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/home");
+    }
+  }, [status, router]);
+
+  if (status === "loading" || status === "authenticated") {
+    return (
+      <div className="flex-1 w-full h-screen bg-[#0a0f1c] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-teal-400 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className={`flex-1 w-full bg-[#0a0f1c] text-white flex flex-col relative overflow-x-hidden ${outfit.className}`}>
       {/* Dynamic Background */}
@@ -20,7 +40,7 @@ export default function LandingPage() {
       </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 px-6 py-6 flex justify-between items-center max-w-7xl mx-auto w-full">
+      <nav className="relative z-10 px-4 sm:px-6 py-6 flex flex-wrap justify-between items-center max-w-7xl mx-auto w-full gap-4">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -35,12 +55,12 @@ export default function LandingPage() {
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex gap-4 items-center"
+          className="flex gap-3 sm:gap-4 items-center shrink-0"
         >
-          <Link href="/auth/signin" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          <Link href="/auth/signin" className="text-sm font-medium text-slate-300 hover:text-white transition-colors whitespace-nowrap">
             Log in
           </Link>
-          <Link href="/auth/signup" className="text-sm font-semibold bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-transform hover:scale-105 active:scale-95">
+          <Link href="/auth/signup" className="text-sm font-semibold bg-white text-slate-950 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full hover:bg-slate-200 transition-transform hover:scale-105 active:scale-95 whitespace-nowrap">
             Get Started
           </Link>
         </motion.div>

@@ -22,7 +22,7 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       {/* Frosted glass bar */}
       <div className="bg-white/80 dark:bg-slate-950/90 backdrop-blur-2xl border-t border-slate-200/60 dark:border-slate-800/60 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-around w-full px-2 pb-safe">
+        <div className="flex items-center justify-start sm:justify-center overflow-x-auto [&::-webkit-scrollbar]:hidden w-full px-4 pb-safe gap-2 sm:gap-6">
           {tabs.map((tab) => {
             const isActive = pathname.startsWith(tab.href);
             const Icon = tab.icon;
@@ -30,7 +30,7 @@ export function BottomNav() {
               <Link
                 key={tab.href}
                 href={tab.href}
-                className="relative flex flex-col items-center justify-center py-4 px-2 min-w-[60px] group"
+                className="relative flex flex-col items-center justify-center py-4 px-2 min-w-[72px] shrink-0 group"
               >
                 {/* Active indicator pill */}
                 {isActive && (

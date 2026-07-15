@@ -22,7 +22,7 @@ export default function MindBotPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="h-full w-full overflow-y-auto bg-slate-50 dark:bg-slate-950 pb-20 custom-scrollbar"
+            className="h-full w-full overflow-y-auto overflow-x-hidden bg-slate-50 dark:bg-slate-950 pb-20 custom-scrollbar"
           >
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/10 dark:bg-teal-500/5 blur-[120px] pointer-events-none rounded-full" />
@@ -47,7 +47,7 @@ export default function MindBotPage() {
                   className="group cursor-pointer border-0 shadow-lg bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1 transition-all overflow-hidden relative"
                 >
                   <div className="absolute top-0 left-0 w-1 h-full bg-rose-500 group-hover:w-2 transition-all"></div>
-                  <CardContent className="p-8">
+                  <CardContent className="p-6 sm:p-8">
                     <div className="mb-6 p-4 bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-2xl inline-block group-hover:scale-110 transition-transform">
                       <BrainCircuit className="w-8 h-8" />
                     </div>
@@ -64,7 +64,7 @@ export default function MindBotPage() {
                   className="group cursor-pointer border-0 shadow-lg bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1 transition-all overflow-hidden relative"
                 >
                   <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500 group-hover:w-2 transition-all"></div>
-                  <CardContent className="p-8">
+                  <CardContent className="p-6 sm:p-8">
                     <div className="mb-6 p-4 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl inline-block group-hover:scale-110 transition-transform">
                       <Play className="w-8 h-8 ml-1" />
                     </div>
@@ -81,7 +81,7 @@ export default function MindBotPage() {
                   className="group cursor-pointer border-0 shadow-lg bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1 transition-all overflow-hidden relative"
                 >
                   <div className="absolute top-0 left-0 w-1 h-full bg-orange-500 group-hover:w-2 transition-all"></div>
-                  <CardContent className="p-8">
+                  <CardContent className="p-6 sm:p-8">
                     <div className="mb-6 p-4 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-2xl inline-block group-hover:scale-110 transition-transform">
                       <Flame className="w-8 h-8" />
                     </div>
