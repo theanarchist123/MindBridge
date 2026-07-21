@@ -27,6 +27,7 @@ export default function StudentHome() {
   const [showCrisis, setShowCrisis] = useState(false);
   const [greeting, setGreeting] = useState("Good morning");
   const [history, setHistory] = useState<any[]>([]);
+  const [moodHistory, setMoodHistory] = useState<any[]>([]);
   const [playlistMood, setPlaylistMood] = useState<string | null>(null);
 
   const getPlaylistForMood = (mood: string) => {
@@ -39,14 +40,30 @@ export default function StudentHome() {
     }
   };
 
-  useEffect(() => {
-    fetch("/api/assessment")
+  const fetchData = () => {
+    fetch(`/api/assessment?_=${Date.now()}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.assessments) {
           setHistory(data.assessments);
         }
       });
+      
+    fetch(`/api/mood/history?_=${Date.now()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.logs) {
+          setMoodHistory(data.logs);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+    
+    // Refresh data when window regains focus (e.g. user navigated back from assessment)
+    window.addEventListener("focus", fetchData);
+    return () => window.removeEventListener("focus", fetchData);
   }, []);
 
   const getLatest = (type: string) => {
@@ -61,16 +78,11 @@ export default function StudentHome() {
     else setGreeting("Good evening");
   }, []);
 
-  // Format real history data for the trend chart
-  // Group by date (e.g. "Jul 12") and take average score or just map each entry
-  const trendData = [...history]
-    .reverse() // Oldest to newest
-    .filter(a => a.type === "PHQ9") // Chart depression trends
-    .slice(-10) // Take last 10
-    .map(a => ({
-      date: format(new Date(a.createdAt), "MMM d"),
-      score: a.totalScore
-    }));
+  // Format real mood history data for the trend chart
+  const trendData = moodHistory.slice(-10).map((log) => ({
+    date: format(new Date(log.createdAt), "MMM d"),
+    score: log.score
+  }));
 
   // Dynamic Resource logic based on history
   const recommendedResource = React.useMemo(() => {
@@ -186,7 +198,10 @@ export default function StudentHome() {
             <>
               <AcademicContext />
               <WeatherContext />
-              <MoodLogger onLogged={(mood) => setPlaylistMood(mood)} />
+              <MoodLogger onLogged={(mood) => {
+                setPlaylistMood(mood);
+                fetchData();
+              }} />
               
               {playlistMood && (
                 <motion.div
