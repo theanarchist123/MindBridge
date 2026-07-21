@@ -8,7 +8,7 @@ export default async function proxy(req: NextRequest) {
 
   if (!token) {
     const url = req.nextUrl.clone();
-    url.pathname = "/auth/login";
+    url.pathname = "/auth/signin";
     url.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(url);
   }

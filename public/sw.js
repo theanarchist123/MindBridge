@@ -53,7 +53,19 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request).then((cachedResponse) => cachedResponse || caches.match('/offline.html')))
+        .catch(() =>
+          caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) return cachedResponse;
+
+            return caches.match('/offline.html').then((offlineResponse) => {
+              return offlineResponse || new Response('Offline', {
+                status: 503,
+                statusText: 'Service Unavailable',
+                headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+              });
+            });
+          })
+        )
     );
     return;
   }
@@ -83,8 +95,16 @@ self.addEventListener('fetch', (event) => {
       }).catch(() => {
         // Fallback for offline mode if needed
         if (event.request.mode === 'navigate') {
-          return caches.match('/offline.html');
+          return caches.match('/offline.html').then((offlineResponse) => {
+            return offlineResponse || new Response('Offline', {
+              status: 503,
+              statusText: 'Service Unavailable',
+              headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+            });
+          });
         }
+
+        return Response.error();
       });
     })
   );

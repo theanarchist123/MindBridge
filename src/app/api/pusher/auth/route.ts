@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from '@/lib/auth';
+import { getToken } from "next-auth/jwt";
 import { pusherServer } from "@/lib/pusher";
 
 // POST /api/pusher/auth — authenticates private Pusher channels
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
+    const token = await getToken({ req: req as any, secret: process.env.NEXTAUTH_SECRET });
+    if (!token?.id) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -26,8 +25,8 @@ export async function POST(req: Request) {
     }
 
     const presenceData = {
-      user_id: (session.user as any).id,
-      user_info: { name: session.user.name },
+      user_id: String(token.id),
+      user_info: { name: token.name },
     };
 
     const authResponse = pusherServer.authorizeChannel(
