@@ -1,34 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle, Lock, Zap, Loader2 } from "lucide-react";
+import { ArrowRight, ShieldCheck, Heart, Sparkles, MessageCircle, Lock, Zap } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { Outfit } from "next/font/google";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
 export default function LandingPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/home");
-    }
-  }, [status, router]);
-
-  if (status === "loading" || status === "authenticated") {
-    return (
-      <div className="flex-1 w-full h-screen bg-[#0a0f1c] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-teal-400 animate-spin" />
-      </div>
-    );
-  }
-
   return (
     <div className={`flex-1 w-full bg-[#0a0f1c] text-white flex flex-col relative overflow-x-hidden ${outfit.className}`}>
       {/* Dynamic Background */}
