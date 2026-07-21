@@ -49,6 +49,10 @@ export default function RootLayout({
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    registration.update();
+                    navigator.serviceWorker.addEventListener('controllerchange', function() {
+                      window.location.reload();
+                    });
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                   }, function(err) {
                     console.log('ServiceWorker registration failed: ', err);

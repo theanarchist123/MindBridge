@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindbridge-v1';
+const CACHE_NAME = 'mindbridge-v2';
 const STATIC_ASSETS = [
   '/',
   '/home',
@@ -32,6 +32,31 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   // Only cache GET requests for our origin
   if (event.request.method !== 'GET') return;
+
+  const url = new URL(event.request.url);
+
+  if (url.origin !== self.location.origin) return;
+
+  // Let Next.js runtime chunks and build assets come straight from the network.
+  // Caching these can pin a page to an old build and trigger chunk-load errors after deploys.
+  if (url.pathname.startsWith('/_next/')) return;
+
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cachedResponse) => cachedResponse || caches.match('/offline.html')))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
